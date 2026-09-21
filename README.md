@@ -93,6 +93,31 @@ sequenceDiagram
    M-->>U: UI refresh and feedback
 ```
 
+## API Example
+
+The API runs at `http://localhost:8080/api`. Create a task with `POST /tasks`:
+
+```bash
+curl -X POST http://localhost:8080/api/tasks \
+   -H "Content-Type: application/json" \
+   -d '{
+      "title": "Prepare weekly report",
+      "description": "Summarize this week\u0027s completed work",
+      "priorityId": 2,
+      "type": "Work",
+      "scheduleType": "Today",
+      "statusId": 1,
+      "createdAt": "2026-09-21T09:00:00.000Z",
+      "subTasks": []
+   }'
+```
+
+Successful response (`200 OK`):
+
+```json
+{"status":"Saved"}
+```
+
 ## Database Design
 The data model centers on tasks and their relationships to status, priority, and subtasks.
 
