@@ -41,6 +41,7 @@ For non-technical stakeholders, the primary purpose is straightforward: users ca
 ### Database
 - MySQL 8
 - Hibernate auto schema update (`hbm2ddl.auto=update`)
+- Database connection settings are loaded from `api/.env` (copy `api/.env.example` and update the values)
 
 ### Build and Tooling
 - Maven (Java dependency and build management)
