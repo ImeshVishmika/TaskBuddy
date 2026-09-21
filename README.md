@@ -93,9 +93,19 @@ sequenceDiagram
    M-->>U: UI refresh and feedback
 ```
 
-## API Example
+## API Endpoints
 
-The API runs at `http://localhost:8080/api`. Create a task with `POST /tasks`:
+The API runs at `http://localhost:8080/api` and exposes the following task endpoints:
+
+| Method | Endpoint | Purpose | Success response |
+| --- | --- | --- | --- |
+| `GET` | `/tasks` | Retrieves all saved tasks, including their status, priority, and subtasks. | `200 OK` with a JSON array of tasks |
+| `POST` | `/tasks` | Creates a task from a JSON request body and links it to the supplied `priorityId` and `statusId`. | `200 OK` with `{"status":"Saved"}` |
+| `DELETE` | `/tasks/{id}` | Deletes the task identified by `{id}`. | `200 OK` with `{"status":"Deleted"}` |
+
+### Create Task Request
+
+The following is an actual request used by the mobile client:
 
 ```bash
 curl -X POST http://localhost:8080/api/tasks \
@@ -117,6 +127,8 @@ Successful response (`200 OK`):
 ```json
 {"status":"Saved"}
 ```
+
+For server-side failures, these endpoints return `500 Internal Server Error` with an error message in the response body.
 
 ## Database Design
 The data model centers on tasks and their relationships to status, priority, and subtasks.
